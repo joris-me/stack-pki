@@ -3,8 +3,12 @@ All about JorisPKI, using [step-ca](https://github.com/smallstep/certificates/).
 
 # Table of Contents
 
-- [Commands](#commands)
 - [Deployment](#deployment)
+- [Commands](#commands)
+
+# Deployment
+
+To write.
 
 # Commands
 
@@ -45,6 +49,4 @@ step certificate create \
 - `--ca root.key` points to the root key to sign the intermediate CA with
 - `--template template/intermediate.tpl` instructs the use of the specified template
 - `--kty OKP` is what key to generate, where "OKP" stands for "octet key pair" for Ed25519
-
-# Deployment
 
