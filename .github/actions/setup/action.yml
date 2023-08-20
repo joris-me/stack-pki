@@ -14,6 +14,6 @@ runs:
       run: |
         sudo apt update
         wget "https://dl.smallstep.com/gh-release/cli/docs-ca-install/v""$STEP_VERSION""/step-cli_""$STEP_VERSION""_amd64.deb"
-        wget "https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v""$step_version""/step-ca_""$STEP_VERSION""_amd64.deb"
+        wget "https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v""$STEP_VERSION""/step-ca_""$STEP_VERSION""_amd64.deb"
         sudo dpkg -i *.deb
         rm *.deb
