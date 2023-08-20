@@ -2,7 +2,7 @@ name: Setup step and step-ca
 description: Installs all dependencies for testing
 
 inputs:
-  step_version:
+  STEP_VERSION:
     description: Verion of step and step-ca to install
     default: "0.24.2"
 
@@ -13,7 +13,7 @@ runs:
       shell: bash
       run: |
         sudo apt update
-        wget "https://dl.smallstep.com/gh-release/cli/docs-ca-install/v""$step_version""/step-cli_""$step_version""_amd64.deb"
-        wget "https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v""$step_version""/step-ca_""$step_version""_amd64.deb"
+        wget "https://dl.smallstep.com/gh-release/cli/docs-ca-install/v""$STEP_VERSION""/step-cli_""$STEP_VERSION""_amd64.deb"
+        wget "https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v""$step_version""/step-ca_""$STEP_VERSION""_amd64.deb"
         sudo dpkg -i *.deb
         rm *.deb
