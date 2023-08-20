@@ -17,6 +17,8 @@ env:
   PKI_INTERMEDIATE_KEY: inter.key
   PKI_INTERMEDIATE_PASSFILE: inter.pass
 
+  PKI_DNS: localhost
+
   STEP_VERSION: 0.24.2
 
 jobs:
