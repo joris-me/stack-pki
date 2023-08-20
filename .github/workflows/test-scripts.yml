@@ -9,7 +9,7 @@ defaults:
 jobs:
   # Generate the `step-ca` ca.json file
   test-generate-root:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     env:
       PKI_ROOT_NAME: TestPKI
       PKI_ROOT_CERT: root.cert

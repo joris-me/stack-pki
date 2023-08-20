@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./util.sh
+source util.sh
 
 # Inputs
 require "PKI_ROOT_NAME"
