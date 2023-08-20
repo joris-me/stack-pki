@@ -15,7 +15,7 @@ require "PKI_INTER_KEY" # out: intermediate key file
 
 # step certificate create <subject> <crt-file> <key-file> [...]
 step certificate create \
-    $PKI_INTER_NAME \
+    "$PKI_INTER_NAME" \
     $PKI_INTER_CERT \
     $PKI_INTER_KEY \
     --password-file $PKI_INTER_PASSFILE \
