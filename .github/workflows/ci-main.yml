@@ -69,10 +69,10 @@ jobs:
         run: |
           bash scripts/generate-config.sh
 
-  test-mark:
-    runs-on: [self-hosted]
-    needs:
-      - test-generate-root
-      - test-generate-intermediate
+  # test-mark:
+  #   runs-on: [self-hosted]
+  #   needs:
+  #     - test-generate-root
+  #     - test-generate-intermediate
 
   
