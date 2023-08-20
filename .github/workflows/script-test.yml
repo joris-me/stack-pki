@@ -12,6 +12,8 @@ jobs:
           PKI_ROOT_PASSFILE: root.pass
       - run: |
           sudo apt-get update
-          sudo apt-get install step step-ca
+          wget https://dl.smallstep.com/gh-release/cli/docs-ca-install/v0.24.4/step-cli_0.24.4_amd64.deb
+          wget https://dl.smallstep.com/gh-release/cli/docs-ca-install/v0.24.2/step-ca_0.24.2_amd64.deb
+          dpkg -i *.deb
           tr -dc A-Za-z0-9 </dev/urandom | head -c 24 > $PKI_ROOT_PASSFILE
       - run: bash scripts/generate-root.sh
