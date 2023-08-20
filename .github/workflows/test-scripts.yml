@@ -1,25 +1,47 @@
-on: [push]
-name: test-scripts
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - .github
+  pull_request:
+    
 
-defaults:
-  run:
-    shell: bash
+name: ci-main
+
+env:
+  PKI_ROOT_NAME: Test Root CA
+  PKI_ROOT_CERT: root.crt
+  PKI_ROOT_KEY: root.key
+  PKI_ROOT_PASSFILE: root.pass
+
+  PKI_INTER_NAME: Test Intermediate CA
+  PKI_INTER_CERT: inter.crt
+  PKI_INTER_KEY: inter.key
+  PKI_INTER_PASSFILE: inter.pass
+
+  STEP_VERSION: 0.24.2
 
 jobs:
-  # Generate the `step-ca` ca.json file
+  # Test: generate-root.sh
   test-generate-root:
     runs-on: [self-hosted, linux, x64]
-    env:
-      PKI_ROOT_NAME: TestPKI
-      PKI_ROOT_CERT: root.cert
-      PKI_ROOT_KEY: root.key
-      PKI_ROOT_PASSFILE: root.pass
-      STEP_VERSION: 0.24.2
     steps:
       - uses: actions/checkout@v3
-      - run: sudo apt-get update
-      - run: wget "https://dl.smallstep.com/gh-release/cli/docs-ca-install/v""$STEP_VERSION""/step-cli_""$STEP_VERSION""_amd64.deb"
-      - run: wget "https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v""$STEP_VERSION""/step-ca_""$STEP_VERSION""_amd64.deb"
-      - run: sudo dpkg -i *.deb
-      - run: echo "insecure-password" > $PKI_ROOT_PASSFILE
+      - uses: ./.github/actions/setup
+      - run: echo "7LSV2RJnUhYvNPt3" > $PKI_ROOT_PASSFILE
       - run: bash scripts/generate-root.sh
+
+  # Test: generate-intermediate.sh
+  test-generate-intermediate:
+    runs-on: [self-hosted, linux, x64]
+    needs: ['test-generate-root']
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup
+      - run: |
+          echo "7LSV2RJnUhYvNPt3" > $PKI_ROOT_PASSFILE
+          echo "JTxDhewSepTSQ8gE" > $PKI_INTER_PASSFILE
+      - run: |
+          bash scripts/generate-root.sh
+          bash scripts/generate-intermediate.sh

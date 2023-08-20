@@ -1,0 +1,19 @@
+name: Setup step and step-ca
+description: Installs all dependencies for testing
+
+inputs:
+  step_version:
+    description: Verion of step and step-ca to install
+    default: "0.24.2"
+
+runs:
+  using: composite
+  steps:
+    - name: Install step, step-ca
+      shell: bash
+      run: |
+        sudo apt update
+        wget "https://dl.smallstep.com/gh-release/cli/docs-ca-install/v""$STEP_VERSION""/step-cli_""$STEP_VERSION""_amd64.deb"
+        wget "https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v""$STEP_VERSION""/step-ca_""$STEP_VERSION""_amd64.deb"
+        sudo dpkg -i *.deb
+        rm *.deb
