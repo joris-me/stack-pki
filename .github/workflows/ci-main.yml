@@ -2,10 +2,7 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - .github
   pull_request:
-    
 
 name: ci-main
 
@@ -15,10 +12,10 @@ env:
   PKI_ROOT_KEY: root.key
   PKI_ROOT_PASSFILE: root.pass
 
-  PKI_INTER_NAME: Test Intermediate CA
-  PKI_INTER_CERT: inter.crt
-  PKI_INTER_KEY: inter.key
-  PKI_INTER_PASSFILE: inter.pass
+  PKI_INTERMEDIATE_NAME: Test Intermediate CA
+  PKI_INTERMEDIATE_CERT: inter.crt
+  PKI_INTERMEDIATE_KEY: inter.key
+  PKI_INTERMEDIATE_PASSFILE: inter.pass
 
   STEP_VERSION: 0.24.2
 
@@ -28,20 +25,54 @@ jobs:
     runs-on: [self-hosted, linux, x64]
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup
-      - run: echo "7LSV2RJnUhYvNPt3" > $PKI_ROOT_PASSFILE
-      - run: bash scripts/generate-root.sh
+      - name: Set up environment
+        uses: ./.github/actions/setup
+
+      - name: Create password file
+        run: echo "7LSV2RJnUhYvNPt3" > $PKI_ROOT_PASSFILE
+
+      - name: Run script
+        run: bash scripts/generate-root.sh
 
   # Test: generate-intermediate.sh
   test-generate-intermediate:
     runs-on: [self-hosted, linux, x64]
-    needs: ['test-generate-root']
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup
-      - run: |
+      - name: Set up environment
+        uses: ./.github/actions/setup
+
+      - name: Create password files
+        run: |
           echo "7LSV2RJnUhYvNPt3" > $PKI_ROOT_PASSFILE
-          echo "JTxDhewSepTSQ8gE" > $PKI_INTER_PASSFILE
-      - run: |
+          echo "JTxDhewSepTSQ8gE" > $PKI_INTERMEDIATE_PASSFILE
+
+      - name: Run script
+        run: |
           bash scripts/generate-root.sh
           bash scripts/generate-intermediate.sh
+
+  # Test: generate-config.sh
+  test-generate-config:
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up environment
+        uses: ./.github/actions/setup
+
+      - name: Create password files
+        run: |
+          echo "7LSV2RJnUhYvNPt3" > $PKI_ROOT_PASSFILE
+          echo "JTxDhewSepTSQ8gE" > $PKI_INTERMEDIATE_PASSFILE
+
+      - name: Run script
+        run: |
+          bash scripts/generate-config.sh
+
+  test-mark:
+    runs-on: [self-hosted]
+    needs:
+      - test-generate-root
+      - test-generate-intermediate
+
+  

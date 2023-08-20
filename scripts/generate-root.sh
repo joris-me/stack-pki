@@ -9,6 +9,7 @@ require "PKI_ROOT_PASSFILE" # root key password file
 require "PKI_ROOT_CERT" # root certicate file
 require "PKI_ROOT_KEY" # root key file
 
+
 # step certificate create <subject> <crt-file> <key-file> [...]
 # `--template template/root.tpl` instructs the use of the specified template
 # `--kty OKP` is what key TYPE to generate, "OKP" stands for "octet key pair"
