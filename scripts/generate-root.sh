@@ -11,9 +11,9 @@ require "PKI_ROOT_KEY"
 
 # step certificate create <subject> <crt-file> <key-file> [...]
 step certificate create \
-    $PKI_ROOT_NAME \
-    $PKI_ROOT_CERT \
-    $PKI_ROOT_KEY \
+    "$PKI_ROOT_NAME" \
+    "$PKI_ROOT_CERT" \
+    "$PKI_ROOT_KEY" \
     --password-file $PKI_ROOT_PASSFILE \
     --template template/root.tpl \
     --kty OKP \
