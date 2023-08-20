@@ -1,8 +1,5 @@
 {
     "subject": {
-		"country": "NL",
-		"organization": "joris.me",
-        "organizationalUnit": "pki.joris.me",
         "commonName": {{ toJson .Subject.CommonName }}
 	},
 	"keyUsage": ["certSign", "crlSign"],

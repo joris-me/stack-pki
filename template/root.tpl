@@ -1,7 +1,5 @@
 {
 	"subject": {
-		"country": "NL",
-		"organization": "joris.me",
         "commonName": {{ toJson .Subject.CommonName }}
 	},
 	"issuer": {{ toJson .Subject }},
