@@ -1,5 +1,7 @@
 on: [push]
 
+name: test-scripts
+
 defaults:
   run:
     shell: bash
@@ -18,8 +20,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: sudo apt-get update
-      - run: wget https://dl.smallstep.com/gh-release/cli/docs-ca-install/v$STEP_VERSION/step-cli_$STEP_VERSION_amd64.deb
-      - run: wget https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v$STEP_VERSION/step-ca_$STEP_VERSION_amd64.deb
+      - run: wget https://dl.smallstep.com/gh-release/cli/docs-ca-install/v$(STEP_VERSION)/step-cli_$(STEP_VERSION)_amd64.deb
+      - run: wget https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v$(STEP_VERSION)/step-ca_$(STEP_VERSION)_amd64.deb
       - run: dpkg -i *.deb
       - run: tr -dc A-Za-z0-9 </dev/urandom | head -c 24 > $PKI_ROOT_PASSFILE
       - run: bash scripts/generate-root.sh
