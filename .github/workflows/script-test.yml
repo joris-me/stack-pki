@@ -10,10 +10,11 @@ jobs:
           PKI_ROOT_CERT: root.cert
           PKI_ROOT_KEY: root.key
           PKI_ROOT_PASSFILE: root.pass
+          STEP_VERSION: 0.24.4
       - run: |
           sudo apt-get update
-          wget https://dl.smallstep.com/gh-release/cli/docs-ca-install/v0.24.4/step-cli_0.24.4_amd64.deb
-          wget https://dl.smallstep.com/gh-release/cli/docs-ca-install/v0.24.2/step-ca_0.24.2_amd64.deb
+          wget https://dl.smallstep.com/gh-release/cli/docs-ca-install/v$STEP_VERSION/step-cli_$STEP_VERSION_amd64.deb
+          wget https://dl.smallstep.com/gh-release/certificates/docs-ca-install/v$STEP_VERSION/step-ca_$STEP_VERSION_amd64.deb
           dpkg -i *.deb
           tr -dc A-Za-z0-9 </dev/urandom | head -c 24 > $PKI_ROOT_PASSFILE
       - run: bash scripts/generate-root.sh
