@@ -1,13 +1,10 @@
 #!/bin/bash
 
 function require () {
-    echo "Require: $1"
-    var=$1
-    echo "Name: $var"
-    resolved=${!var}
-    echo "Resolved: $resolved"
-    if [ -z "${!var}" ]; then
-        echo "Missing required environment variable: \$$1"
+    name=$1
+    resolved=${!name}
+    if [ -z "$resolved" ]; then
+        echo "Missing required environment variable: \$name"
         exit 1
     fi;
 }
