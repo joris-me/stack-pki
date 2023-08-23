@@ -78,6 +78,8 @@ jobs:
       - test-generate-root
       - test-generate-intermediate
       - test-generate-config
+    steps:
+      - run: echo "Test passed"
 
   # Build image & push to registry
   docker:
