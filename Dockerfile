@@ -9,12 +9,13 @@ RUN mkdir -p /config/certs && \
 # Bake the `ca.json` in the image
 COPY image/ca.json /config/ca.json
 
+# Restore user
+USER $STEPUID:$STEPGUID
+
 # Files/volumes needed:
 #  - /config/certs/root.crt: should be root cert
 #  - /config/certs/intermediate.crt: should be intermediate cert
 #  - /config/secrets/intermediate.key: should be intermediate private key 
 #  - /config/secrets/intermediate.pass: file containing the intermediate CA key password
 #  - /config/secrets
-RUN ["step-ca", "--password-file", "$q"]
-
-USER $STEPUID
+ENTRYPOINT ["step-ca", "--password-file", "$q"]
