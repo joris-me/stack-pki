@@ -11,7 +11,7 @@ step ca init \
     --dns=$PKI_DNS \
     --address=:443 \
     --provisioner=base \
-    --password-file=password \
+    --password-file=$PKI_ROOT_PASSFILE \
     --no-db
 
 # Remove all generated provisioners

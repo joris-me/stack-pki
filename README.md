@@ -1,6 +1,15 @@
 # pki
 Everything needed to manage `JorisPKI`. Uses [step-ca](https://github.com/smallstep/certificates/).
 
+# Plan
+
+Current things to do:
+- Generate ca.json and compare it against the one in the repository.
+    - On mismatch, fail the `test-generate-config` job
+- Build image that is preconfigured for ease of use in a `docker-compose.yml`
+- Make tests for `generate-root.sh` ? Maybe by `step certificate inspect --format json`
+- Make tests for `generate-intermediate.sh` ?
+
 # Manual
 Below are all individual steps listed for managing `JorisPKI`.
 

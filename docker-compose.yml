@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  acme:
+    image: ghcr.io/joris-me/pki:latest
+    volumes:
+      - /opt/pki:/config:ro
+    environment:
+      - name=value
