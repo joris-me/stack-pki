@@ -4,7 +4,7 @@ FROM smallstep/step-ca:0.24.2-hsm
 USER 0
 RUN mkdir -p /config/certs && \
     mkdir -p /config/secrets && \
-    chown -R /config $STEPUID:$STEPGUID
+    chown -R $STEPUID:$STEPGUID /config
 
 # Bake the `ca.json` in the image
 COPY image/ca.json /config/ca.json
